@@ -1,4 +1,4 @@
-package h_id_;
+package hSudoku;
 
 import org.junit.jupiter.api.Test;
 

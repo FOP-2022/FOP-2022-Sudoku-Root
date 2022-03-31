@@ -1,19 +1,19 @@
 {
-  "name": "_name_",
+  "name": "FOP-2022-HSudoku",
   "assignmentIds": [
-    "h_id_"
+    "hSudoku"
   ],
   "sourceSets": [
     {
       "name": "grader",
       "files": [
-        "h_id_/H_id__RubricProvider.java"
+        "hSudoku/HSudoku_RubricProvider.java"
       ]
     },
     {
       "name": "solution",
       "files": [
-        "h_id_/Main.java"
+        "hSudoku/Main.java"
       ]
     }
   ]
