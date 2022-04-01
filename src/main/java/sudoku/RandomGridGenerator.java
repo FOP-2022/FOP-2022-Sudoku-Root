@@ -2,11 +2,12 @@ package sudoku;
 
 public class RandomGridGenerator implements GridGenerator {
 
-    private final SudokuSolver solver = new SudokuSolverImpl();
+    private final SudokuSolver solver;
 
     private final double density;
 
-    public RandomGridGenerator(double density) {
+    public RandomGridGenerator(final SudokuSolver solver, final double density) {
+        this.solver = solver;
         this.density = density;
     }
 
