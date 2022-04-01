@@ -2,8 +2,8 @@ package sudoku;
 
 public class StandardGridGenerator implements GridGenerator {
     @Override
-    public int[][] createGrid() {
-        return new int[][]{
+    public Grid createGrid() {
+        return new Grid(new int[][]{
             {5, 3, 4, 6, 7, 8, 9, 1, 2},
             {6, 7, 2, 1, 9, 5, 3, 4, 8},
             {1, 9, 8, 3, 4, 2, 5, 6, 7},
@@ -13,6 +13,6 @@ public class StandardGridGenerator implements GridGenerator {
             {9, 6, 1, 5, 3, 7, 2, 8, 4},
             {2, 8, 7, 4, 1, 9, 6, 3, 5},
             {3, 4, 5, 2, 8, 6, 1, 7, 9},
-        };
+        });
     }
 }

@@ -2,9 +2,9 @@ package sudoku;
 
 public interface GridChecker {
 
-    void check(int[][] grid);
+    void check(Grid grid);
 
-    default boolean checkCatching(int[][] grid) {
+    default boolean checkCatching(Grid grid) {
         try {
             check(grid);
             return true;

@@ -3,12 +3,12 @@ package sudoku;
 public class GridPrinterImpl implements GridPrinter {
 
     @Override
-    public void print(final int[][] grid) {
+    public void print(final Grid grid) {
         printHorizontal(0);
-        for (int y = 0; y < grid.length; y++) {
+        for (int y = 0; y < 9; y++) {
             System.out.print("┃ ");
-            for (int x = 0; x < grid[y].length; x++) {
-                System.out.print(grid[y][x] + " ");
+            for (int x = 0; x < 9; x++) {
+                System.out.print(grid.get(x, y) + " ");
                 if (x % 3 == 2) {
                     if (x == 8) {
                         System.out.print("┃");

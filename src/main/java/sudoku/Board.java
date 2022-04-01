@@ -1,12 +1,8 @@
 package sudoku;
 
-import org.jetbrains.annotations.Nullable;
-
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class Board {
 
@@ -25,7 +21,7 @@ public class Board {
     }
 
     // 9x9 grid
-    private final int[][] grid;
+    private final Grid grid;
     private final GridChecker gridChecker;
     private final GridPrinter gridPrinter;
 
@@ -37,7 +33,7 @@ public class Board {
         public UpdateRequest(final int x, final int y, final int value) {
             checkPos(x);
             checkPos(y);
-            checkPos(y - 1); // adjust by one, inputs are [1,9] not [0,8]
+            checkValue(value);
             this.x = x;
             this.y = y;
             this.value = value;
@@ -57,35 +53,35 @@ public class Board {
     public void run() {
         final Scanner in = new Scanner(System.in);
         while (true) {
-            if (checkGridFinished()) {
+            if (grid.isFinished()) {
                 checkGrid();
                 break;
             }
             gridPrinter.print(grid);
-            final @Nullable UpdateRequest next = nextRequest(in);
-            if (next == null) {
+            if (handleNext(in)) {
                 break;
             }
-            grid[next.y][next.x] = next.value;
         }
     }
 
-    private @Nullable UpdateRequest nextRequest(final Scanner in) {
+    /**
+     * @return Whether program should quit
+     */
+    private boolean handleNext(final Scanner in) {
         System.out.println("Enter next position in format 'x,y:value' or 'quit'");
-        final UpdateRequest next;
         try {
             final String nextLine = in.nextLine();
             if ("quit".equals(nextLine)) {
                 System.out.println("Goodbye");
-                return null;
+                return true;
             }
-            next = nextPos(nextLine);
-            checkRequest(next);
+            final UpdateRequest next = nextPos(nextLine);
+            grid.set(next.x, next.y, next.value);
         } catch (Exception e) {
             System.err.println("Could not parse next position :: " + e.getMessage());
-            return nextRequest(in);
+            return handleNext(in);
         }
-        return next;
+        return false;
     }
 
     private UpdateRequest nextPos(final String nextLine) {
@@ -98,17 +94,6 @@ public class Board {
             Integer.parseInt(matcher.group("y")),
             Integer.parseInt(matcher.group("value"))
         );
-    }
-
-    private void checkRequest(final UpdateRequest request) {
-        if (grid[request.y][request.x] != 0) {
-            throw new IllegalArgumentException(
-                String.format("Field at position (%d, %d) already has a value", request.x, request.y));
-        }
-    }
-
-    private boolean checkGridFinished() {
-        return Stream.of(grid).flatMapToInt(IntStream::of).noneMatch(i -> i == 0);
     }
 
     private void checkGrid() {
