@@ -70,6 +70,10 @@ public class Board {
     private boolean handleNext(final Scanner in) {
         System.out.println("Enter next position in format 'x,y:value' or 'quit'");
         try {
+            if (!in.hasNextLine()) {
+                System.out.println("No next line, exiting...");
+                return true;
+            }
             final String nextLine = in.nextLine();
             if ("quit".equals(nextLine)) {
                 System.out.println("Goodbye");

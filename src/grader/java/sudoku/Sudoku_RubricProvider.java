@@ -5,10 +5,10 @@ import org.sourcegrade.jagr.api.rubric.RubricForSubmission;
 import org.sourcegrade.jagr.api.rubric.RubricProvider;
 
 @RubricForSubmission("sudoku")
-public class HSudoku_RubricProvider implements RubricProvider {
+public class Sudoku_RubricProvider implements RubricProvider {
 
     public static final Rubric RUBRIC = Rubric.builder()
-        .title("HSudoku")
+        .title("Sudoku")
         .build();
 
     @Override

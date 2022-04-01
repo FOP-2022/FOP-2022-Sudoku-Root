@@ -3,8 +3,8 @@ import org.sourcegrade.submitter.submit
 plugins {
     java
     application
-    id("org.sourcegrade.style") version "1.3.0"
     id("org.sourcegrade.submitter") version "0.4.0"
+    id("com.github.johnrengelman.shadow") version "7.1.2"
 }
 
 version = "0.1.0-SNAPSHOT"
@@ -14,7 +14,7 @@ repositories {
 }
 
 submit {
-    assignmentId = "hSudoku"
+    assignmentId = "sudoku"
     studentId = "ab12cdef"
     firstName = "sol_first"
     lastName = "sol_last"
@@ -36,7 +36,7 @@ dependencies {
 }
 
 application {
-    mainClass.set("hSudoku.Main")
+    mainClass.set("sudoku.Main")
 }
 
 tasks {
@@ -46,6 +46,7 @@ tasks {
             runDir.mkdirs()
         }
         workingDir = runDir
+        standardInput = System.`in`
     }
     test {
         doFirst {
@@ -70,7 +71,7 @@ tasks {
     val graderJar by creating(Jar::class) {
         group = "build"
         afterEvaluate {
-            archiveFileName.set("FOP-2022-HSudoku-${project.version}.jar")
+            archiveFileName.set("FOP-2022-Sudoku-${project.version}.jar")
             from(sourceSets.main.get().allSource)
             from(sourceSets.test.get().allSource)
             from(grader.allSource)
@@ -89,7 +90,7 @@ tasks {
             .map { it.file }
 
         val runtimeDeps = grader.runtimeClasspath.mapNotNull {
-            if (it.path.toLowerCase().contains("hSudoku") || jagrRuntime.contains(it)) {
+            if (it.path.toLowerCase().contains("sudoku") || jagrRuntime.contains(it)) {
                 null
             } else if (it.isDirectory) {
                 it
@@ -98,7 +99,7 @@ tasks {
             }
         }
         from(runtimeDeps)
-        archiveFileName.set("FOP-2022-HSudoku-${project.version}-libs.jar")
+        archiveFileName.set("FOP-2022-Sudoku-${project.version}-libs.jar")
     }
     create("graderAll") {
         group = "build"
