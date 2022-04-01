@@ -1,7 +1,5 @@
 package sudoku;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,7 +32,6 @@ public class SudokuSolverImpl implements SudokuSolver {
         return true;
     }
 
-    @NotNull
     private List<Integer> getPlacements(final Grid grid, final int x, final int y) {
         var placements = IntStream
             .rangeClosed(1, 9)
