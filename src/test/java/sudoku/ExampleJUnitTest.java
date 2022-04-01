@@ -1,4 +1,4 @@
-package hSudoku;
+package sudoku;
 
 import org.junit.jupiter.api.Test;
 
