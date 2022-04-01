@@ -1,6 +1,6 @@
 package sudoku;
 
-public class StandardGridGenerator implements GridGenerator {
+public class SolvedGridGenerator implements GridGenerator {
     @Override
     public Grid createGrid() {
         return new Grid(new int[][]{
