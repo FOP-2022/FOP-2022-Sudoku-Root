@@ -11,7 +11,14 @@ public class Main {
      * @param args program arguments, currently ignored
      */
     public static void main(String[] args) {
-        final Board board = new Board(new EmptyGridGenerator(), new GridCheckerImpl(), new GridPrinterImpl());
-        board.run();
+        var gridPrinter = new GridPrinterImpl();
+        var gridGenerator = new StandardGridGenerator();
+        var sudokuSolver = new SudokuSolverImpl(new GridCheckerImpl());
+
+        var grid = gridGenerator.createGrid();
+
+        gridPrinter.print(grid);
+        sudokuSolver.solve(grid);
+        gridPrinter.print(grid);
     }
 }
