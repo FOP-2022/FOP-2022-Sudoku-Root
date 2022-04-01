@@ -15,10 +15,12 @@ public class Main {
         var gridGenerator = new RandomGridGenerator();
         var sudokuSolver = new SudokuSolverImpl();
 
-        var grid = gridGenerator.createGrid();
+        for (int i = 0; i < 99; i++) {
+            var grid = gridGenerator.createGrid();
 
-        gridPrinter.print(grid);
-        sudokuSolver.solve(grid);
-        gridPrinter.print(grid);
+            gridPrinter.print(grid);
+            sudokuSolver.solve(grid);
+            gridPrinter.print(grid);
+        }
     }
 }
