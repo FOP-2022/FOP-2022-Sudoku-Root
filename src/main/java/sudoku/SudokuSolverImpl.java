@@ -35,14 +35,14 @@ public class SudokuSolverImpl implements SudokuSolver {
     private List<Integer> getPlacements(final Grid grid, final int x, final int y) {
         var placements = IntStream
             .rangeClosed(1, 9)
-            .filter(value -> isUwuPlacement(grid, x, y, value))
+            .filter(value -> checkPlacement(grid, x, y, value))
             .boxed()
             .collect(Collectors.toList());
         Collections.shuffle(placements);
         return placements;
     }
 
-    private boolean isUwuPlacement(final Grid grid, final int x, final int y, final int value) {
+    private boolean checkPlacement(final Grid grid, final int x, final int y, final int value) {
         for (int l = 0; l < 9; l++) {
             if (grid.get(x, l) == value || grid.get(l, y) == value) {
                 return false;
