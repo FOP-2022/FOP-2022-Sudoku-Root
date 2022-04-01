@@ -1,5 +1,6 @@
 package sudoku;
 
+import java.util.Arrays;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -40,5 +41,9 @@ public class Grid {
 
     public boolean isFinished() {
         return Stream.of(data).flatMapToInt(IntStream::of).noneMatch(i -> i == 0);
+    }
+
+    public int[][] copyData() {
+        return Arrays.stream(data).map(int[]::clone).toArray(int[][]::new);
     }
 }
