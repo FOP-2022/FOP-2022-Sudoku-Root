@@ -1,1 +1,1 @@
-rootProject.name = "FOP-2022-HSudoku-Root"
+rootProject.name = "FOP-2022-Sudoku-Root"
