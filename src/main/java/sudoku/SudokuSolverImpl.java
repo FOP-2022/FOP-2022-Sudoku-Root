@@ -1,5 +1,12 @@
 package sudoku;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 public class SudokuSolverImpl implements SudokuSolver {
 
     @Override
@@ -14,12 +21,12 @@ public class SudokuSolverImpl implements SudokuSolver {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 if (grid[i][j] == 0) {
-                    for (int k = 1; k <= 9; k++) {
-                        if (isUwuPlacement(grid, i, j, k)) {
-                            grid[i][j] = k;
-                            solve0(grid);
-                            grid[i][j] = 0;
-                        }
+                    var placements = getPlacements(grid, i, j);
+
+                    for (int k : placements) {
+                        grid[i][j] = k;
+                        solve0(grid);
+                        grid[i][j] = 0;
                     }
                     return;
                 }
@@ -27,6 +34,18 @@ public class SudokuSolverImpl implements SudokuSolver {
         }
 
         throw new ThreadDeath();
+    }
+
+    @NotNull
+    private List<Integer> getPlacements(int[][] grid, int i, int j) {
+        var placements = IntStream
+            .rangeClosed(1, 9)
+            .filter(k ->
+                isUwuPlacement(grid, i, j, k))
+            .boxed()
+            .collect(Collectors.toList());
+        Collections.shuffle(placements);
+        return placements;
     }
 
     private boolean isUwuPlacement(int[][] grid, int i, int j, int k) {
