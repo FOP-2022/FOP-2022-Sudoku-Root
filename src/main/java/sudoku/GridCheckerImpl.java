@@ -26,7 +26,7 @@ public class GridCheckerImpl implements GridChecker {
     }
 
     private void check3by3(final Grid grid, final int posX, final int posY) {
-        check(grid, i -> i % 3, i -> i / 3);
+        check(grid, i -> posX + i / 3, i -> posY + i % 3);
     }
 
     private void checkRow(final Grid grid, final int posY) {
