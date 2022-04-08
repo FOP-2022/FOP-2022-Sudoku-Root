@@ -15,7 +15,7 @@ public class Board {
     }
 
     private static void checkValue(final int value) {
-        if (0 > value || value >= 9) {
+        if (1 > value || value >= 10) {
             throw new IllegalArgumentException(String.format("Value %d must be in range [1, 9]", value));
         }
     }
