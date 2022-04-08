@@ -6,6 +6,10 @@ import java.util.function.Consumer;
 
 public class GridPrinterImpl implements GridPrinter {
 
+    private static final char[] LEFT_CORNERS = {'┏', '┣', '┗',};
+    private static final char[] MIDDLE_CORNERS = {'┳', '╋', '┻'};
+    private static final char[] RIGHT_CORNERS = {'┓', '┫', '┛',};
+
     /**
      * Wraps the provided {@link String} with a configurable Ansi-sequence terminated with reset.
      */
@@ -63,43 +67,15 @@ public class GridPrinterImpl implements GridPrinter {
      *
      * @param num The type of horizontal bar to print
      */
-    private void printHorizontal(int num) {
-        switch (num) {
-            case 0:
-                System.out.print('┏');
-                break;
-            case 1:
-                System.out.print('┣');
-                break;
-            case 2:
-                System.out.print('┗');
-        }
+    private void printHorizontal(final int num) {
+        System.out.print(LEFT_CORNERS[num]);
         for (int x = 1; x < 24; x++) {
             if (x % 8 == 0) {
-                switch (num) {
-                    case 0:
-                        System.out.print('┳');
-                        break;
-                    case 1:
-                        System.out.print('╋');
-                        break;
-                    case 2:
-                        System.out.print('┻');
-                }
+                System.out.print(MIDDLE_CORNERS[num]);
             } else {
                 System.out.print("━");
             }
         }
-        switch (num) {
-            case 0:
-                System.out.print('┓');
-                break;
-            case 1:
-                System.out.print('┫');
-                break;
-            case 2:
-                System.out.print('┛');
-        }
-        System.out.println();
+        System.out.println(RIGHT_CORNERS[num]);
     }
 }
