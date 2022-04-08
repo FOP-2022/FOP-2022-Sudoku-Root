@@ -24,7 +24,13 @@ public class GridPrinterImpl implements GridPrinter {
         for (int y = 0; y < 9; y++) {
             System.out.print("┃ ");
             for (int x = 0; x < 9; x++) {
-                System.out.print(grid.get(x, y) + " ");
+                if (grid.isPermanent(x, y)) {
+                    System.out.print(toAnsi(Integer.toString(grid.get(x, y)), Ansi::fgBlue, Ansi::bold) + " ");
+                } else if (grid.isSet(x, y)) {
+                    System.out.print(toAnsi(Integer.toString(grid.get(x, y)), Ansi::fgGreen, Ansi::bold) + " ");
+                } else {
+                    System.out.print(toAnsi(Integer.toString(grid.get(x, y)), Ansi::fgBrightDefault, Ansi::bold) + " ");
+                }
                 if (x % 3 == 2) {
                     if (x == 8) {
                         System.out.print("┃");
