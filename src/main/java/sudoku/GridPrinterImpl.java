@@ -32,6 +32,7 @@ public class GridPrinterImpl implements GridPrinter {
                     System.out.print(toAnsi(Integer.toString(grid.get(x, y)), Ansi::fgBrightDefault, Ansi::bold) + " ");
                 }
                 if (x % 3 == 2) {
+                    // don't print space at the end
                     if (x == 8) {
                         System.out.print("┃");
                     } else {
@@ -41,11 +42,27 @@ public class GridPrinterImpl implements GridPrinter {
             }
             System.out.println();
             if (y % 3 == 2) {
+                // print either middle or last horizontal bar
+                // if y == 8, print last (with other corners)
                 printHorizontal(y == 8 ? 2 : 1);
             }
         }
     }
 
+    /**
+     * Prints a horizontal bar.
+     *
+     * <p>
+     * The following values for num are accepted:
+     * </p>
+     * <ul>
+     *     <li>0 for the top bar</li>
+     *     <li>1 for a middle bar</li>
+     *     <li>2 for the last bar</li>
+     * </ul>
+     *
+     * @param num The type of horizontal bar to print
+     */
     private void printHorizontal(int num) {
         switch (num) {
             case 0:
